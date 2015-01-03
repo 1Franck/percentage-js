@@ -27,6 +27,9 @@ percentage-js
     var p = Percentage.times("3h2min30sec", "1d12h")
     // p = 8.45
 
+    var p = Percentage.times("5:35:22", "10:00:00");
+    // p = 55.89
+
 Time tokens:
 - `ms`  > millisecond,
 - `sec` > second,
@@ -36,6 +39,9 @@ Time tokens:
 - `w`   > week (7 days),
 - `m`   > month (based on 365days/12month = 30.41 days),
 - `y`   > year (based on 365days)
+
+Alertnative syntax:
+[h]:[m]:[s].[ms]
 
 ####Changing default decimal numbers (2 by default)
 
