@@ -36,6 +36,14 @@ module.exports = function(grunt) {
         },
       },
 
+      tests: {
+        files: ['build/percentage.js', 'tests/*.js'],
+        tasks: ['tests'],
+        options: {
+          spawn: false,
+        },
+      },
+
     },
 
     qunit: {
@@ -52,5 +60,8 @@ module.exports = function(grunt) {
 
   // Default task (AKA BUILD)
   grunt.registerTask('default', ['copy:build', 'uglify']);
+
+  // Test task
+  grunt.registerTask('tests', ['qunit']);
 
 };
