@@ -41,7 +41,7 @@ Time tokens:
 - `y`   > year (based on 365days)
 
 Alertnative syntax:
-[h]:[m]:[s].[ms]
+`[h]:[m]:[s].[ms]`
 
 ####Changing default decimal numbers (2 by default)
 
