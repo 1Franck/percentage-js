@@ -38,10 +38,11 @@ var Percentage = (function(){
      * 
      * @param  string d     
      * @param  string start 
-     * @param  string end   
+     * @param  string end  
+     * @param  mixed  dec
      * @return integer
      */
-    function dates(d, start, end) {
+    function dates(d, start, end, dec) {
 
         var d     = new Date(d).getTime(),
             start = new Date(start).getTime(),
@@ -49,7 +50,7 @@ var Percentage = (function(){
             d1    = d - start,
             d2    = end - start;
 
-        return perc(d1,d2);
+        return perc(d1,d2,dec);
     }
 
     /**
@@ -57,13 +58,14 @@ var Percentage = (function(){
      * 
      * @param  mixed t1
      * @param  mixed t2
+     * @param  mixed dec
      * @return integer
      */
-    function times(t1, t2) {
+    function times(t1, t2, dec) {
         t1 = regexDateTime(t1);
         t2 = regexDateTime(t2);
 
-        return perc(t1,t2);
+        return perc(t1,t2,dec);
     }
 
     /**
@@ -74,7 +76,7 @@ var Percentage = (function(){
      */
     function regexDateTime(str) {
 
-        var regex = /([0-9]+)(h|min|sec|ms|y|d|m)/gi; 
+        var regex = /([0-9]+)(h|min|sec|ms|y|d|m|w)/gi; 
         var m, match = [], r = 0;
         
         // get match(es)
@@ -100,6 +102,7 @@ var Percentage = (function(){
     perc.DEFAULT_DEMIMAL = 2,
     perc.dates = dates;
     perc.times = times;
+    perc.num   = perc;
 
     return perc;
 
