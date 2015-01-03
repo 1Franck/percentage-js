@@ -36,5 +36,11 @@ QUnit.test("times", function(assert) {
     var p = Percentage.times("1d", "1w");
     assert.strictEqual(p, 14.29, 'Percentage.times("1d", "1w") > result: ' + p);
 
+    var p = Percentage.times("2:00", "12:00");
+    assert.strictEqual(p, 16.67, 'Percentage.times("2:00", "12:00") > result: ' + p);
+
+    var p = Percentage.times("5:35:22", "10:00:00");
+    assert.strictEqual(p, 55.89, 'Percentage.times("5:35:22", "10:00:00") > result: ' + p);
+
 });
 
