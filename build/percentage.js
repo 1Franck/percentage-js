@@ -6,8 +6,8 @@
 
 var Percentage = (function(){
 
-    var p = {};
-    var time_suffix = { // in seconds
+    var p = {},
+        time_suffix = { // in seconds
             ms  : 0.0001,
             sec : 1,
             min : 60,
@@ -16,7 +16,18 @@ var Percentage = (function(){
             w   : 604800,   // week  (7 days)
             m   : 2628000,  // month (based on 365days/12months = 30.41days)
             y   : 31536000, // year  (based on 365days)
-    };
+        },
+        filesize_suffix = {
+            b   : 1,
+            kb  : 10,
+            mb  : 20,
+            gb  : 30,
+            tb  : 40,
+            pb  : 50,
+            eb  : 60,
+            zb  : 70,
+            yb  : 80,
+        };
 
     /**
      * Calc percentage
@@ -64,8 +75,21 @@ var Percentage = (function(){
     function times(t1, t2, dec) {
         t1 = regexTimeTokens(t1) || regexTimeTokens2(t1);
         t2 = regexTimeTokens(t2) || regexTimeTokens2(t2);
-
         return perc(t1,t2,dec);
+    }
+
+    /**
+     * File size (in bytes)
+     * 
+     * @param  str     s1  
+     * @param  str     s2  
+     * @param  integer dec 
+     * @return integer     
+     */
+    function filesize(s1, s2, dec) {
+        s1 = regexFileSize(s1) || s1;
+        s2 = regexFileSize(s2) || s2;
+        return perc(s1,s2,dec);
     }
 
     /**
@@ -131,6 +155,22 @@ var Percentage = (function(){
     }
 
     /**
+     * Regex for file size
+     * 
+     * @param  string str
+     * @return integer   
+     */
+    function regexFileSize(str) {
+
+        var regex  = /([0-9]*\.?[0-9]+)\s?(b|kb|mb|gb|tb|pb|eb|zb|yb)/gi; 
+        var match = getMatches(regex, str), r = 0;
+
+        if(match.length < 1) return false;
+
+        return match[0][1] * Math.pow(2, filesize_suffix[match[0][2].toLowerCase()]);
+    }
+
+    /**
      * Get matches
      * 
      * @param  string regex 
@@ -153,9 +193,10 @@ var Percentage = (function(){
      * Public stuff
      */
     perc.DEFAULT_DEMIMAL = 2,
-    perc.dates = dates;
-    perc.times = times;
-    perc.num   = perc;
+    perc.dates    = dates;
+    perc.times    = times;
+    perc.num      = perc;
+    perc.filesize = filesize;
 
     return perc;
 

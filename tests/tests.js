@@ -44,3 +44,15 @@ QUnit.test("times", function(assert) {
 
 });
 
+/**
+ * Filesize
+ */
+QUnit.test("filesize", function(assert) {
+
+    var p = Percentage.filesize("11.15 MB", "15 mb");
+    assert.strictEqual(p, 74.33, 'Percentage.filesize("11.15 mb", "15 mb") > result: ' + p);
+
+    var p = Percentage.filesize("300mb", "1gb");
+    assert.strictEqual(p, 29.3, 'Percentage.filesize("300mb", "1gb") > result: ' + p);
+
+});

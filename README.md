@@ -43,6 +43,15 @@ Time tokens:
 Alertnative syntax:
 `[hour(s)]:[minute(s)]:[second(s)].[millisecond(s)]`
 
+
+####`Percentage.filesize(size1, size2, [decimal]);`
+
+    var p = Percentage.filesize("11.15 mb", "15 mb");
+    // p = 74.33
+
+    var p = Percentage.filesize("300mb", "1gb");
+    // p = 29.3
+
 ####Changing default decimal numbers (2 by default)
 
     Percentage.DEFAULT_DEMIMAL = 4
