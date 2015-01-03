@@ -54,6 +54,11 @@ Alertnative syntax:
     var p = Percentage.filesize("300mb", "1gb");
     // p = 29.3
 
+Symbol supported: B,KB,MB,GB,TB,PB,EB,ZB,YB (case insensitive).
+
+If no symbol specified, number will be treat as bytes number.
+
+
 ####Changing default decimal numbers (2 by default)
 
     Percentage.DEFAULT_DEMIMAL = 4
