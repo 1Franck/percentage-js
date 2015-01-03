@@ -12,7 +12,6 @@ percentage-js
 
 ####`Percentage.dates(date, start, end, [decimal]);`
 
-
     var p = Percentage.dates("2013-04-05", "2013", "2014");
     // p = 25.75
 
@@ -21,7 +20,6 @@ percentage-js
 
 
 ####`Percentage.times(time1, time2, [decimal]);`
-
 
     var p = Percentage.times("1h", "1d");
     // p = 4.17
@@ -38,7 +36,6 @@ Time tokens:
 - `w`   > week (7 days),
 - `m`   > month (based on 365days/12month = 30.41 days),
 - `y`   > year (based on 365days)
-
 
 ####Changing default decimal numbers (2 by default)
 

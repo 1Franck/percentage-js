@@ -32,5 +32,9 @@ QUnit.test("times", function(assert) {
 
     var p = Percentage.times("3h2min30sec", "1d12h");
     assert.strictEqual(p, 8.45, 'Percentage.times("3h2min30sec", "1d12h") > result: ' + p);
+
+    var p = Percentage.times("1d", "1w");
+    assert.strictEqual(p, 14.29, 'Percentage.times("1d", "1w") > result: ' + p);
+
 });
 
