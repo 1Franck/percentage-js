@@ -1,6 +1,8 @@
 percentage-js
 =============
 
+Convert numbers, dates, times, filesize to percentage.
+
 ####`Percentage.num(n1, n2, [decimal]);`
 
     var p = Percentage.num(28, 87);
