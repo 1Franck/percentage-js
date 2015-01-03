@@ -62,38 +62,91 @@ var Percentage = (function(){
      * @return integer
      */
     function times(t1, t2, dec) {
-        t1 = regexTimeTokens(t1);
-        t2 = regexTimeTokens(t2);
+        t1 = regexTimeTokens(t1) || regexTimeTokens2(t1);
+        t2 = regexTimeTokens(t2) || regexTimeTokens2(t2);
 
         return perc(t1,t2,dec);
     }
 
     /**
-     * Transform time string to ms
+     * Regex time tokens (ex: 1d22min38sec)
      * 
-     * @param  string  str [description]
+     * @param  string  str
      * @return integer
      */
     function regexTimeTokens(str) {
 
-        var regex = /([0-9]+)(h|min|sec|ms|y|d|m|w)/gi; 
-        var m, match = [], r = 0;
-        
-        // get match(es)
-        while ((m = regex.exec(str)) != null) {
-            match.push(m);
-        }
+        var regex  = /([0-9]+)(h|min|sec|ms|y|d|m|w)/gi; 
+        var match = getMatches(regex, str), r = 0;
 
+        if(match.length < 1) return false;
+        
         // transform to matches to millisecond
         for(var i=0;i<match.length;++i) {
             var num = match[i][1];
             var str = match[i][2];
-
             r += (num * (time_suffix[str] * 1000));
         }
 
         return r;
     }
+
+    /**
+     * Regex time tokens (ex: 111:32:21.1553)
+     * 
+     * @param  string str
+     * @return integer    
+     */
+    function regexTimeTokens2(str) {
+
+        var regex = /:?([0-9]+)|(.[0-9]+)/gi;
+        var match = getMatches(regex, str), 
+            r = 0, ms = 0, 
+            l = match.length;
+
+        if(l > 0) {
+
+            //millisecond
+            if(match[l-1][2] !== undefined) {
+                ms = match[l-1][2];
+                match = match.slice(0,l-1);
+                --l;
+            }
+
+            if(l == 3) {
+                r = r + match[2][1]*1000;
+                r = r + match[1][1]*60*1000;
+                r = r + match[0][1]*60*60*1000;
+            }
+            else if(l == 2) {
+                r = r + match[1][1]*1000;
+                r = r + match[0][1]*60*1000;
+            }
+            else {
+                r = r + match[0][1]*1000;
+            }
+        }
+
+        return r*1 + ms*1;
+    }
+
+    /**
+     * Get matches
+     * 
+     * @param  string regex 
+     * @param  string str 
+     * @return array     
+     */
+    function getMatches(regex, str) {
+        var m, match = [];
+
+        while ((m = regex.exec(str)) != null) {
+            match.push(m);
+        }
+
+        return match;
+    }
+
 
 
     /**
