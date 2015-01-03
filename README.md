@@ -31,3 +31,7 @@ percentage-js
 
     var p = Percentage.times("3h2min30sec", "1d12h")
     // p = 8.12
+
+####Changing default decimal numbers (2 by default)
+
+    `Percentage.DEFAULT_DEMIMAL = 4`
