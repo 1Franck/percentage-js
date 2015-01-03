@@ -12,10 +12,10 @@ var Percentage = (function(){
             sec : 1,
             min : 60,
             h   : 3600,
-            d   : 86400,   // day
-            w   : 604800,  // week (4.3 week)
-            m   : 2600640, // month
-            y   : 31536000, // year
+            d   : 86400,    // day
+            w   : 604800,   // week  (7 days)
+            m   : 2628000,  // month (based on 365days/12months = 30.41days)
+            y   : 31536000, // year  (based on 365days)
     };
 
     /**
