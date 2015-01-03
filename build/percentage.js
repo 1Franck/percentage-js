@@ -62,8 +62,8 @@ var Percentage = (function(){
      * @return integer
      */
     function times(t1, t2, dec) {
-        t1 = regexDateTime(t1);
-        t2 = regexDateTime(t2);
+        t1 = regexTimeTokens(t1);
+        t2 = regexTimeTokens(t2);
 
         return perc(t1,t2,dec);
     }
@@ -74,7 +74,7 @@ var Percentage = (function(){
      * @param  string  str [description]
      * @return integer
      */
-    function regexDateTime(str) {
+    function regexTimeTokens(str) {
 
         var regex = /([0-9]+)(h|min|sec|ms|y|d|m|w)/gi; 
         var m, match = [], r = 0;
