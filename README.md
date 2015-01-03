@@ -34,4 +34,4 @@ percentage-js
 
 ####Changing default decimal numbers (2 by default)
 
-    `Percentage.DEFAULT_DEMIMAL = 4`
+    Percentage.DEFAULT_DEMIMAL = 4
