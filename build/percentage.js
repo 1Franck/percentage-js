@@ -1,8 +1,5 @@
 /**
  * Percentage JS
- *
- * @author  Francois Lajoie
- * @license MIT License
  */
 
 "use strict";
@@ -89,8 +86,6 @@ var Percentage = (function(){
         for(var i=0;i<match.length;++i) {
             var num = match[i][1];
             var str = match[i][2];
-
-            console.log(num, str, time_suffix[str]);
 
             r += (num * (time_suffix[str] * 1000));
         }
