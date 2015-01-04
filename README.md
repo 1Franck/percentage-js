@@ -20,6 +20,7 @@ Convert numbers, dates, times, filesize to percentage.
     var p = Percentage.dates("2013-04-05 18:36:32", "2013-01-31", "2014-01-01 12:00");
     // p = 19.29
 
+Support others formatting options from Date object.
 
 ####`Percentage.times(time1, time2, [decimal]);`
 
