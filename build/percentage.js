@@ -7,6 +7,12 @@
 var Percentage = (function(){
 
     var p = {},
+        regex = {
+            time1    : /([0-9]+)\s?(h|min|sec|ms|y|d|m|w)/gi,
+            time2    : /:?([0-9]+)|(.[0-9]+)/gi,
+            filesize : /([0-9]*\.?[0-9]+)\s?(b|kb|mb|gb|tb|pb|eb|zb|yb)/gi,
+            length   : /([0-9]*\.?[0-9]+)\s?(mm|cm|dm|km|m|ft|in|yd)/gi
+        },
         time_suffix = { // in seconds
             ms  : 0.0001,
             sec : 1,
@@ -17,7 +23,7 @@ var Percentage = (function(){
             m   : 2628000,  // month (based on 365days/12months = 30.41days)
             y   : 31536000, // year  (based on 365days)
         },
-        filesize_suffix = {
+        filesize_suffix = { // binary measurement
             b   : 1,
             kb  : 10,
             mb  : 20,
@@ -28,14 +34,15 @@ var Percentage = (function(){
             zb  : 70,
             yb  : 80,
         },
-        length = {
-            mm: 3,
-            cm: 2,
-            dm: 1,
+        lengths_suffix = { // based on 1 meter
+            mm: 0.001,
+            cm: 0.01,
+            dm: 0.1,
             m : 1,
-            ft: 1,
-            in: 1,
-
+            km: 1000,
+            ft: 3.28084,
+            in: 39.3701,
+            yd: 1.0936 
         };
 
     /**
@@ -108,6 +115,20 @@ var Percentage = (function(){
     }
 
     /**
+     * Lengths
+     * 
+     * @param  str     l1  
+     * @param  str     l2  
+     * @param  integer dec 
+     * @return integer     
+     */
+    function lengths(l1, l2, dec) {
+        l1 = regexLengths(l1) || l1;
+        l2 = regexLengths(l2) || l2;
+        return perc(l1,l2,dec);
+    }
+
+    /**
      * Regex time tokens (ex: 1d22min38sec)
      * 
      * @param  string  str
@@ -115,13 +136,10 @@ var Percentage = (function(){
      */
     function regexTimeTokens(str) {
 
-        var regex  = /([0-9]+)(h|min|sec|ms|y|d|m|w)/gi; 
-        var match = getMatches(regex, str), r = 0;
+        var match = getMatches(regex.time1, str), r = 0;
 
         if(match.length < 1) return false;
-
-
-        
+  
         // transform to matches to millisecond
         for(var i=0;i<match.length;++i) {
             var num = match[i][1];
@@ -140,8 +158,7 @@ var Percentage = (function(){
      */
     function regexTimeTokens2(str) {
 
-        var regex = /:?([0-9]+)|(.[0-9]+)/gi;
-        var match = getMatches(regex, str), 
+        var match = getMatches(regex.time2, str), 
             r = 0, ms = 0, 
             l = match.length;
 
@@ -179,12 +196,43 @@ var Percentage = (function(){
      */
     function regexFileSize(str) {
 
-        var regex  = /([0-9]*\.?[0-9]+)\s?(b|kb|mb|gb|tb|pb|eb|zb|yb)/gi; 
-        var match = getMatches(regex, str), r = 0;
+        var match = getMatches(regex.filesize, str), r = 0;
 
         if(match.length < 1) return false;
 
         return match[0][1] * Math.pow(2, filesize_suffix[match[0][2].toLowerCase()]);
+    }
+
+    /**
+     * Regex time tokens (ex: 1d22min38sec)
+     * 
+     * @param  string  str
+     * @return integer
+     */
+    function regexLengths(str) {
+
+        var match = getMatches(regex.length, str), r = 0;
+
+        //console.log(match)
+
+        if(match.length < 1) return false;
+  
+        // transform to matches to meters
+        for(var i=0;i<match.length;++i) {
+            var num = match[i][1];
+            var str = match[i][2];
+            if(str == "yd" || str == "ft" || str == "in") {
+                r += (num / lengths_suffix[str]);
+                console.log(lengths_suffix[str], num);
+            }
+            else {
+                r += (num * lengths_suffix[str]);
+            }
+            
+            //console.log(lengths_suffix[str]);
+        }
+
+        return r;
     }
 
     /**
@@ -214,6 +262,7 @@ var Percentage = (function(){
     perc.times    = times;
     perc.num      = perc;
     perc.filesize = filesize;
+    perc.lengths  = lengths;
 
     return perc;
 
