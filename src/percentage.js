@@ -48,7 +48,7 @@ var Percentage = (function(){
      * @return 
      */
     function perc(n1, n2, dec) {
-        dec = dec || perc.DEFAULT_DEMIMAL;
+        dec = (dec !== undefined) ? dec : perc.DEFAULT_DEMIMAL;
         var r = (n1/n2)*100;
         return r.toFixed(dec);
     }
