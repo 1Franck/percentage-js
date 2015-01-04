@@ -64,10 +64,10 @@ var Percentage = (function(){
      */
     function dates(d, start, end, dec) {
 
-        //firefox dont like '-', replace it by sapce
-        d = d.replace(/-/g, ' ');
-        start = start.replace(/-/g, ' ');
-        end = end.replace(/-/g, ' ');
+        //firefox dont like '-', replace it by /
+        d = d.replace(/-/g, '/');
+        start = start.replace(/-/g, '/');
+        end = end.replace(/-/g, '/');
 
         var d     = new Date(d).getTime(),
             start = new Date(start).getTime(),
