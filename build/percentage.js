@@ -27,6 +27,15 @@ var Percentage = (function(){
             eb  : 60,
             zb  : 70,
             yb  : 80,
+        },
+        length = {
+            mm: 3,
+            cm: 2,
+            dm: 1,
+            m : 1,
+            ft: 1,
+            in: 1,
+
         };
 
     /**
@@ -40,8 +49,8 @@ var Percentage = (function(){
      */
     function perc(n1, n2, dec) {
         dec = dec || perc.DEFAULT_DEMIMAL;
-        var r = (n1/n2)*100;
-        return r.toFixed(dec)*1;
+        var r = ((n1/n2)*100)*1;
+        return r.toFixed(dec);
     }
 
     /**
@@ -54,6 +63,11 @@ var Percentage = (function(){
      * @return integer
      */
     function dates(d, start, end, dec) {
+
+        //firefox dont like '-', replace it by sapce
+        d = d.replace(/-/g, ' ');
+        start = start.replace(/-/g, ' ');
+        end = end.replace(/-/g, ' ');
 
         var d     = new Date(d).getTime(),
             start = new Date(start).getTime(),
@@ -104,6 +118,8 @@ var Percentage = (function(){
         var match = getMatches(regex, str), r = 0;
 
         if(match.length < 1) return false;
+
+
         
         // transform to matches to millisecond
         for(var i=0;i<match.length;++i) {
