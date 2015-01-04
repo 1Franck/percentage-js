@@ -8,6 +8,9 @@ QUnit.test("numbers", function(assert) {
 
     var p = Percentage.num(28, 87, 10);
     assert.equal(p, 32.183908046, "Percentage.num(28, 87, 10) > result: " + p);
+
+    var p = Percentage.num(174, 87, 0);
+    assert.equal(p, 200, "Percentage.num(28, 87, 10) > result: " + p);
 });
 
 /**
@@ -20,6 +23,12 @@ QUnit.test("dates", function(assert) {
 
     var p = Percentage.dates("2013-04-05 18:36:32", "2013-01-31", "2014-01-01 12:00");
     assert.equal(p, 19.29, 'Percentage.dates("2013-04-05 18:15:05", "2013-01-31", "2015-01-01 12:00") > result: ' + p);
+
+    var p = Percentage.dates("2013/04/05 18:36:32", "2013/01/31", "2014/01/01 12:00");
+    assert.equal(p, 19.29, 'Percentage.dates("2013/04/05 18:36:32", "2013/01/31", "2014/01/01 12:00") > result: ' + p);
+
+    var p = Percentage.dates("5 April 13 18:36:32", "31 January 2013", "1 January 2014 12:00");
+    assert.equal(p, 19.29, 'Percentage.dates("5 April 13 18:36:32", "31 January 2013", "1 January 2014 12:00") > result: ' + p);
 });
 
 /**
@@ -55,4 +64,12 @@ QUnit.test("filesize", function(assert) {
     var p = Percentage.filesize("300mb", "1gb");
     assert.equal(p, 29.3, 'Percentage.filesize("300mb", "1gb") > result: ' + p);
 
+    var p = Percentage.filesize("894.92 GB", "2 TB");
+    assert.equal(p, 43.70, 'Percentage.filesize("300mb", "1gb") > result: ' + p);
+
+    var p = Percentage.filesize("1024 kb", "1 mb");
+    assert.equal(p, 100, 'Percentage.filesize("1024 kb", "1 mb") > result: ' + p);
+
+    var p = Percentage.filesize("1024", "1kb");
+    assert.equal(p, 100, 'Percentage.filesize("1024", "1kb") > result: ' + p);
 });
