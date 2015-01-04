@@ -100,3 +100,21 @@ QUnit.test("lengths", function(assert) {
     assert.equal(p, 100, 'Percentage.lengths("100000 cm", "1 km") > result: ' + p);
 
 });
+
+/**
+ * Mass
+ */
+QUnit.test("mass", function(assert) {
+
+    var p = Percentage.mass("1000g", "1kg");
+    assert.equal(p, 100, 'Percentage.mass("1000g", "1kg") > result: ' + p);
+
+    var p = Percentage.mass("1000mg", "1g");
+    assert.equal(p, 100, 'Percentage.mass("1000mg", "1g") > result: ' + p);
+
+    var p = Percentage.mass("2.2046lb", "1kg");
+    assert.equal(p, 100, 'Percentage.mass("2.2046lb", "1kg") > result: ' + p);
+
+    var p = Percentage.mass("0.035274oz", "1g");
+    assert.equal(p, 100, 'Percentage.mass("0.035274oz", "1g") > result: ' + p);
+});
