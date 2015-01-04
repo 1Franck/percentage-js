@@ -11,9 +11,10 @@ var Percentage = (function(){
             time1    : /([0-9]+)\s?(h|min|sec|ms|y|d|m|w)/gi,
             time2    : /:?([0-9]+)|(.[0-9]+)/gi,
             filesize : /([0-9]*\.?[0-9]+)\s?(b|kb|mb|gb|tb|pb|eb|zb|yb)/gi,
-            length   : /([0-9]*\.?[0-9]+)\s?(mm|cm|dm|km|m|ft|in|yd)/gi
+            length   : /([0-9]*\.?[0-9]+)\s?(mm|cm|dm|km|m|ft|in|yd)/gi,
+            mass     : /([0-9]*\.?[0-9]+)\s?(mg|kg|g|lb|oz)/gi
         },
-        time_suffix = { // in seconds
+        time_suffix = { // based on 1 second
             ms  : 0.0001,
             sec : 1,
             min : 60,
@@ -34,7 +35,7 @@ var Percentage = (function(){
             zb  : 70,
             yb  : 80,
         },
-        lengths_suffix = { // based on 1 meter
+        length_suffix = { // based on 1 meter
             mm: 0.001,
             cm: 0.01,
             dm: 0.1,
@@ -43,6 +44,13 @@ var Percentage = (function(){
             ft: 3.28084,
             in: 39.3701,
             yd: 1.0936 
+        },
+        mass_suffix = { // based on 1 gram
+            mg: 0.001,
+            g:  1,
+            kg: 1000,
+            lb: 0.0022046,
+            oz: 0.035274
         };
 
     /**
@@ -129,6 +137,20 @@ var Percentage = (function(){
     }
 
     /**
+     * Mass
+     * 
+     * @param  str     m1  
+     * @param  str     m2  
+     * @param  integer dec 
+     * @return integer     
+     */
+    function mass(m1, m2, dec) {
+        m1 = regexMass(m1) || m1;
+        m2 = regexMass(m2) || m2;
+        return perc(m1,m2,dec);
+    }
+
+    /**
      * Regex time tokens (ex: 1d22min38sec)
      * 
      * @param  string  str
@@ -204,7 +226,7 @@ var Percentage = (function(){
     }
 
     /**
-     * Regex time tokens (ex: 1d22min38sec)
+     * Regex length (ex: 15km, 34cm, ...)
      * 
      * @param  string  str
      * @return integer
@@ -213,8 +235,6 @@ var Percentage = (function(){
 
         var match = getMatches(regex.length, str), r = 0;
 
-        //console.log(match)
-
         if(match.length < 1) return false;
   
         // transform to matches to meters
@@ -222,14 +242,38 @@ var Percentage = (function(){
             var num = match[i][1];
             var str = match[i][2];
             if(str == "yd" || str == "ft" || str == "in") {
-                r += (num / lengths_suffix[str]);
-                console.log(lengths_suffix[str], num);
+                r += (num / length_suffix[str]);
             }
             else {
-                r += (num * lengths_suffix[str]);
+                r += (num * length_suffix[str]);
             }
-            
-            //console.log(lengths_suffix[str]);
+        }
+
+        return r;
+    }
+
+    /**
+     * Regex mass (ex: 15kg, 34lb, ...)
+     * 
+     * @param  string  str
+     * @return integer
+     */
+    function regexMass(str) {
+
+        var match = getMatches(regex.mass, str), r = 0;
+
+        if(match.length < 1) return false;
+  
+        // transform to matches to gram
+        for(var i=0;i<match.length;++i) {
+            var num = match[i][1];
+            var str = match[i][2];
+            if(str == "lb" || str == "oz") {
+                r += (num / mass_suffix[str]);
+            }
+            else {
+                r += (num * mass_suffix[str]);
+            }
         }
 
         return r;
@@ -252,8 +296,6 @@ var Percentage = (function(){
         return match;
     }
 
-
-
     /**
      * Public stuff
      */
@@ -263,6 +305,7 @@ var Percentage = (function(){
     perc.num      = perc;
     perc.filesize = filesize;
     perc.lengths  = lengths;
+    perc.mass     = mass;
 
     return perc;
 
