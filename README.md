@@ -1,7 +1,7 @@
 percentage-js
 =============
 
-Convert numbers, dates, times, filesize to percentage.
+#####Convert numbers, dates, times, filesize to percentage.
 
 ####`Percentage.num(n1, n2, [decimal]);`
 
@@ -63,3 +63,8 @@ If no symbol specified, number will be treat as bytes number.
 ####Changing default decimal numbers (2 by default)
 
     Percentage.DEFAULT_DEMIMAL = 4
+
+
+####License
+
+percentage-js is licensed under MIT public license.
