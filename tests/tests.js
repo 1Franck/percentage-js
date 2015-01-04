@@ -42,6 +42,12 @@ QUnit.test("times", function(assert) {
     var p = Percentage.times("3h2min30sec", "1d12h");
     assert.equal(p, 8.45, 'Percentage.times("3h2min30sec", "1d12h") > result: ' + p);
 
+    var p = Percentage.times("3h 2min 30sec", "1d 12h");
+    assert.equal(p, 8.45, 'Percentage.times("3h 2min 30sec", "1d 12h") > result: ' + p);
+
+    var p = Percentage.times("3 h 2 min 30 sec", "1 d 12 h");
+    assert.equal(p, 8.45, 'Percentage.times("3 h 2 min 30 sec", "1 d 12 h") > result: ' + p);
+
     var p = Percentage.times("1d", "1w");
     assert.equal(p, 14.29, 'Percentage.times("1d", "1w") > result: ' + p);
 
@@ -72,4 +78,25 @@ QUnit.test("filesize", function(assert) {
 
     var p = Percentage.filesize("1024", "1kb");
     assert.equal(p, 100, 'Percentage.filesize("1024", "1kb") > result: ' + p);
+});
+
+
+/**
+ * Lengths
+ */
+QUnit.test("lengths", function(assert) {
+
+    var p = Percentage.lengths("1000mm", "1m");
+    assert.equal(p, 100, 'Percentage.lengths("1000 mm", "1m") > result: ' + p);
+
+    var p = Percentage.lengths("39.3701 in", "10 dm");
+    assert.equal(p, 100, 'Percentage.lengths("3.28084", "10dm") > result: ' + p);
+
+    var p = Percentage.lengths("1.0936 yd", "100 cm");
+    assert.equal(p, 100, 'Percentage.lengths("1.0936 yd", "100 cm") > result: ' + p);
+
+
+    var p = Percentage.lengths("100000 cm", "1 km");
+    assert.equal(p, 100, 'Percentage.lengths("100000 cm", "1 km") > result: ' + p);
+
 });
