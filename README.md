@@ -68,3 +68,6 @@ If no symbol specified, number will be treat as bytes number.
 ####License
 
 percentage-js is licensed under MIT public license.
+
+
+#%
