@@ -82,6 +82,23 @@ Length tokens:
 - `yd`  > yard
 
 
+####`Percentage.mass(mass1, mass2, [decimal]);`
+
+    var p = Percentage.mass("1000g", "1kg");
+    // p = 100
+
+    var p = Percentage.mass("1320lb", "1800kg");
+    // p = 33.26
+
+Mass tokens:
+
+- `mg`  > milligram,
+- `g`   > gram,
+- `kg`  > kilogram,
+- `lb`  > pound,
+- `oz`  > ounce,
+
+
 ####Changing default decimal numbers (2 by default)
 
     Percentage.DEFAULT_DEMIMAL = 4
