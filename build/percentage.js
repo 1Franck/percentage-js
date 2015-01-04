@@ -49,7 +49,7 @@ var Percentage = (function(){
      */
     function perc(n1, n2, dec) {
         dec = dec || perc.DEFAULT_DEMIMAL;
-        var r = ((n1/n2)*100)*1;
+        var r = (n1/n2)*100;
         return r.toFixed(dec);
     }
 
