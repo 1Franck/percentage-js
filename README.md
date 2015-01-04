@@ -1,7 +1,7 @@
 percentage-js
 =============
 
-#####Convert numbers, dates, times, filesize to percentage.
+#####Convert numbers, dates, times, filesize and lengths to percentage.
 
 ####`Percentage.num(n1, n2, [decimal]);`
 
@@ -58,6 +58,28 @@ Alternative syntax:
 Symbol supported: B,KB,MB,GB,TB,PB,EB,ZB,YB (case insensitive).
 
 If no symbol specified, number will be treat as bytes number.
+
+####`Percentage.lengths(length1, length2, [decimal]);`
+
+    var p = Percentage.lengths("0.8km", "1800yd")
+    // p = 48.60
+
+    var p = Percentage.lengths("326.25 m", "5 km");
+    // p = 6.53
+
+    var p = Percentage.lengths("60in", "10m");
+    // p = 15.24
+
+Length tokens:
+
+- `mm`  > millimeter,
+- `cm`  > centimeter,
+- `dm`  > decimeter,
+- `m`   > meter,
+- `km`  > kilometer,
+- `ft`  > feet,
+- `in`  > inches,
+- `yd`  > yard
 
 
 ####Changing default decimal numbers (2 by default)
