@@ -42,7 +42,7 @@ Time tokens:
 - `m`   > month (based on 365days/12month = 30.41 days),
 - `y`   > year (based on 365days)
 
-Alertnative syntax:
+Alternative syntax:
 `[hour(s)]:[minute(s)]:[second(s)].[millisecond(s)]`
 
 
