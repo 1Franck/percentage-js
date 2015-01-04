@@ -64,7 +64,8 @@ var Percentage = (function(){
      */
     function dates(d, start, end, dec) {
 
-        //firefox dont like '-', replace it by /
+        //firefox dont like '-', ie fail with space
+        //so we replace '-'' by '/''
         d = d.replace(/-/g, '/');
         start = start.replace(/-/g, '/');
         end = end.replace(/-/g, '/');
