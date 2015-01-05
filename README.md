@@ -5,11 +5,13 @@ percentage-js
 
 ####`Percentage.num(n1, n2, [decimal]);`
 
-    var p = Percentage.num(28, 87);
-    // p = 32.18
+```js
+var p = Percentage.num(28, 87);
+// p = 32.18
 
-    var p = Percentage.num(28, 87, 10);
-    // p = 32.183908046
+var p = Percentage.num(28, 87, 10);
+// p = 32.183908046
+```
 
 
 ####`Percentage.dates(date, start, end, [decimal]);`
