@@ -16,24 +16,28 @@ var p = Percentage.num(28, 87, 10);
 
 ####`Percentage.dates(date, start, end, [decimal]);`
 
-    var p = Percentage.dates("2013-04-05", "2013", "2014");
-    // p = 25.80
+```js
+var p = Percentage.dates("2013-04-05", "2013", "2014");
+// p = 25.80
 
-    var p = Percentage.dates("2013-04-05 18:36:32", "2013-01-31", "2014-01-01 12:00");
-    // p = 19.29
+var p = Percentage.dates("2013-04-05 18:36:32", "2013-01-31", "2014-01-01 12:00");
+// p = 19.29
+```
 
 Support others formatting options from Date object.
 
 ####`Percentage.times(time1, time2, [decimal]);`
 
-    var p = Percentage.times("1h", "1d");
-    // p = 4.17
+```js
+var p = Percentage.times("1h", "1d");
+// p = 4.17
 
-    var p = Percentage.times("3h2min30sec", "1d12h")
-    // p = 8.45
+var p = Percentage.times("3h2min30sec", "1d12h")
+// p = 8.45
 
-    var p = Percentage.times("5:35:22", "10:00:00");
-    // p = 55.89
+var p = Percentage.times("5:35:22", "10:00:00");
+// p = 55.89
+```
 
 Time tokens:
 - `ms`  > millisecond,
@@ -51,11 +55,13 @@ Alternative syntax:
 
 ####`Percentage.filesize(size1, size2, [decimal]);`
 
-    var p = Percentage.filesize("11.15 mb", "15 mb");
-    // p = 74.33
+```js
+var p = Percentage.filesize("11.15 mb", "15 mb");
+// p = 74.33
 
-    var p = Percentage.filesize("300mb", "1gb");
-    // p = 29.3
+var p = Percentage.filesize("300mb", "1gb");
+// p = 29.3
+```
 
 Symbol supported: B,KB,MB,GB,TB,PB,EB,ZB,YB (case insensitive).
 
@@ -63,14 +69,16 @@ If no symbol specified, number will be treat as bytes number.
 
 ####`Percentage.lengths(length1, length2, [decimal]);`
 
-    var p = Percentage.lengths("0.8km", "1800yd")
-    // p = 48.60
+```js
+var p = Percentage.lengths("0.8km", "1800yd")
+// p = 48.60
 
-    var p = Percentage.lengths("326.25 m", "5 km");
-    // p = 6.53
+var p = Percentage.lengths("326.25 m", "5 km");
+// p = 6.53
 
-    var p = Percentage.lengths("60in", "10m");
-    // p = 15.24
+var p = Percentage.lengths("60in", "10m");
+// p = 15.24
+```
 
 Length tokens:
 
@@ -86,11 +94,13 @@ Length tokens:
 
 ####`Percentage.mass(mass1, mass2, [decimal]);`
 
-    var p = Percentage.mass("1000g", "1kg");
-    // p = 100
+```js
+var p = Percentage.mass("1000g", "1kg");
+// p = 100
 
-    var p = Percentage.mass("1320lb", "1800kg");
-    // p = 33.26
+var p = Percentage.mass("1320lb", "1800kg");
+// p = 33.26
+```
 
 Mass tokens:
 
@@ -103,7 +113,9 @@ Mass tokens:
 
 ####Changing default decimal numbers (2 by default)
 
-    Percentage.DEFAULT_DEMIMAL = 4
+```js
+Percentage.DEFAULT_DEMIMAL = 4
+```
 
 
 ####License
